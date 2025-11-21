@@ -1,0 +1,35 @@
+Exp-16 CONTROLLING USER ACCESS
+1. What privilege should a user be given to log on to the Oracle Server? Is
+this a system or an object privilege?
+GRANT CREATE SESSION TO username;
+2. What privilege should a user be given to create tables?
+GRANT CREATE TABLE TO username;
+3. If you create a table, who can pass along privileges to other users on
+your table?
+GRANT SELECT ON table_name TO user2 WITH GRANT OPTION;
+4. You are the DBA. You are creating many users who require the same
+system privileges. What should you use to make your job easier?
+CREATE ROLE analyst_role;
+GRANT CREATE SESSION, CREATE TABLE TO analyst_role;
+GRANT analyst_role TO user1, user2, user3;
+5. What command do you use to change your password?
+ALTER USER username IDENTIFIED BY new_password;
+6. Grant another user access to your DEPARTMENTS table. Have the user
+grant you query access to his or her DEPARTMENTS table.
+GRANT SELECT ON departments TO other_user;
+7. Query all the rows in your DEPARTMENTS table.
+SELECT * FROM departments;
+8. Add a new row to your DEPARTMENTS table.
+INSERT INTO departments (department_id, department_name)
+VALUES (500, 'Education');
+COMMIT;
+9. Query the USER_TABLES data dictionary to see information about the
+tables that you own
+SELECT table_name, tablespace_name, num_rows
+FROM user_tables;
+10.Revoke the SELECT privilege on your table from the other team.
+REVOKE SELECT ON departments FROM other_user;11.Remove the row you inserted into the DEPARTMENTS table in step 8
+and save the changes.
+DELETE FROM departments
+WHERE department_id = 500; -- or 510 for Team 2
+COMMIT;
